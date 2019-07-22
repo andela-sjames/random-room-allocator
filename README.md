@@ -1,2 +1,2 @@
-# random-room-allocation
-Random room allocation system in go. 
+# random-room-allocator
+A random room allocation system in go. 
