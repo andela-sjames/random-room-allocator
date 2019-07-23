@@ -1,6 +1,6 @@
 package main
 
-// Person struct defined
+// Employee struct defined
 type Employee struct {
 	name        string
 	gender      string
