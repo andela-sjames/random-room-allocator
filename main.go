@@ -1,7 +1,7 @@
 package main
 
 // Person struct defined
-type Person struct {
+type Employee struct {
 	name        string
 	gender      string
 	position    string
