@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
 // Employee struct defined
@@ -26,14 +27,16 @@ func closeFile(f *os.File) {
 
 func generateObject(f *os.File) {
 	fmt.Println("generating data object")
+
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text()) // Println will add back the final '\n'
+		line := strings.Fields(scanner.Text())
+		fmt.Printf("%q\n", line[0])
 	}
+
 	if err := scanner.Err(); err != nil {
 		fmt.Fprintln(os.Stderr, "reading standard input:", err)
 	}
-
 }
 
 // FileParser gets data from inputfile.
