@@ -36,31 +36,30 @@ func generateObject(f *os.File) {
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		line := strings.Fields(scanner.Text())
-		if line[2] == "STAFF" {
+		if line[3] == "STAFF" {
 			staffMap := make(map[string]string)
-			staffMap["name"] = line[0]
-			staffMap["gender"] = line[1]
-			staffMap["position"] = line[2]
+			staffMap["name"] = fmt.Sprintf("%s %s ", line[0], line[1])
+			staffMap["gender"] = line[2]
+			staffMap["position"] = line[3]
 
 			staffSlice = append(staffSlice, staffMap)
 		}
 
-		if line[2] == "FELLOW" {
+		if line[3] == "FELLOW" {
 			fellowsMap := make(map[string]string)
 			optSpace := "true"
 			if line[3] == "Y" {
 				optSpace = "false"
 			}
 
-			fellowsMap["name"] = line[0]
-			fellowsMap["gender"] = line[1]
-			fellowsMap["position"] = line[2]
+			fellowsMap["name"] = fmt.Sprintf("%s %s ", line[0], line[1])
+			fellowsMap["gender"] = line[2]
+			fellowsMap["position"] = line[3]
 			fellowsMap["optSpace"] = optSpace
 
 			fellowSlice = append(fellowSlice, fellowsMap)
 		}
 
-		// fmt.Printf("%q\n", line)
 	}
 
 	if err := scanner.Err(); err != nil {
