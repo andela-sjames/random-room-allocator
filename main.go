@@ -16,6 +16,8 @@ type employee struct {
 	optSpace bool
 }
 
+type employeeMap map[string][]map[string]string
+
 func closeFile(f *os.File) {
 	fmt.Println("closing")
 	err := f.Close()
@@ -25,7 +27,7 @@ func closeFile(f *os.File) {
 	}
 }
 
-func generateObject(f *os.File) map[string][]map[string]string {
+func generateObject(f *os.File) employeeMap {
 	fmt.Println("generating data object")
 
 	employees := make(map[string][]map[string]string)
@@ -76,7 +78,7 @@ type fileParser struct {
 	filepath string
 }
 
-func (fp *fileParser) GetEmployees() map[string][]map[string]string {
+func (fp *fileParser) GetEmployees() employeeMap {
 	f, err := os.Open(fp.filepath)
 	if err != nil {
 		log.Fatalf("open file error: %v", err)
