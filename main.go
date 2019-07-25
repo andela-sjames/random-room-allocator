@@ -25,7 +25,7 @@ func closeFile(f *os.File) {
 	}
 }
 
-func generateObject(f *os.File) {
+func generateObject(f *os.File) map[string][]map[string]string {
 	fmt.Println("generating data object")
 
 	employees := make(map[string][]map[string]string)
@@ -68,8 +68,7 @@ func generateObject(f *os.File) {
 
 	employees["staff"] = staffSlice
 	employees["fellow"] = fellowSlice
-
-	fmt.Printf("%q\n", employees)
+	return employees
 }
 
 // FileParser gets data from inputfile.
@@ -77,19 +76,18 @@ type fileParser struct {
 	filepath string
 }
 
-func (fp *fileParser) GetEmployees() {
+func (fp *fileParser) GetEmployees() map[string][]map[string]string {
 	f, err := os.Open(fp.filepath)
 	if err != nil {
 		log.Fatalf("open file error: %v", err)
-		return
+		panic(err)
 	}
 	defer closeFile(f)
-	generateObject(f)
-
+	return generateObject(f)
 }
 
 func main() {
 	inputfile := &fileParser{filepath: "inputA.txt"}
-	inputfile.GetEmployees()
-	// fmt.Printf("%q\n", employees)
+	e := inputfile.GetEmployees()
+	fmt.Println(e)
 }
