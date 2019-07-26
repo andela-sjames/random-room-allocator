@@ -4,12 +4,16 @@ import (
 	"bufio"
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 type employeeMap map[string][]map[string]interface{}
-type membersSpace map[string]interface{}
+type employeeDataMap map[string]interface{}
+type employeeSlice []map[string]interface{}
+type membersSpace []map[string]interface{}
 
 type space struct {
 	name       string
@@ -43,17 +47,17 @@ func closeFile(f *os.File) {
 func generateObject(f *os.File) employeeMap {
 	fmt.Println("generating data object")
 
-	employees := make(map[string][]map[string]interface{})
-	var staffSlice []map[string]interface{}
+	employees := make(employeeMap)
+	var staffSlice employeeSlice
 
-	var maleFellowSlice []map[string]interface{}
-	var femaleFellowSlice []map[string]interface{}
+	var maleFellowSlice employeeSlice
+	var femaleFellowSlice employeeSlice
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		line := strings.Fields(scanner.Text())
 		if line[3] == "STAFF" {
-			staffMap := make(map[string]interface{})
+			staffMap := make(employeeDataMap)
 			staffMap["name"] = fmt.Sprintf("%s %s ", line[0], line[1])
 			staffMap["gender"] = line[2]
 			staffMap["position"] = line[3]
@@ -62,8 +66,8 @@ func generateObject(f *os.File) employeeMap {
 		}
 
 		if line[3] == "FELLOW" {
-			maleFellowsMap := make(map[string]interface{})
-			femaleFellowsMap := make(map[string]interface{})
+			maleFellowsMap := make(employeeDataMap)
+			femaleFellowsMap := make(employeeDataMap)
 			livingSpace := true
 			if line[3] == "Y" {
 				livingSpace = false
@@ -86,9 +90,7 @@ func generateObject(f *os.File) employeeMap {
 
 				femaleFellowSlice = append(femaleFellowSlice, femaleFellowsMap)
 			}
-
 		}
-
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -119,5 +121,13 @@ func (fp *fileParser) GetEmployees() employeeMap {
 func main() {
 	inputfile := &fileParser{filepath: "inputA.txt"}
 	e := inputfile.GetEmployees()
-	fmt.Println(e)
+	var eSlice employeeSlice
+	for _, val := range e {
+		eSlice = append(eSlice, val...)
+	}
+
+	// shuffle employee slice for random office allocation
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(eSlice), func(i, j int) { eSlice[i], eSlice[j] = eSlice[j], eSlice[i] })
+
 }
