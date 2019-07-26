@@ -44,9 +44,10 @@ func generateObject(f *os.File) employeeMap {
 	fmt.Println("generating data object")
 
 	employees := make(map[string][]map[string]interface{})
-
-	var fellowSlice []map[string]interface{}
 	var staffSlice []map[string]interface{}
+
+	var maleFellowSlice []map[string]interface{}
+	var femaleFellowSlice []map[string]interface{}
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
@@ -61,18 +62,31 @@ func generateObject(f *os.File) employeeMap {
 		}
 
 		if line[3] == "FELLOW" {
-			fellowsMap := make(map[string]interface{})
+			maleFellowsMap := make(map[string]interface{})
+			femaleFellowsMap := make(map[string]interface{})
 			livingSpace := true
 			if line[3] == "Y" {
 				livingSpace = false
 			}
 
-			fellowsMap["name"] = fmt.Sprintf("%s %s", line[0], line[1])
-			fellowsMap["gender"] = line[2]
-			fellowsMap["position"] = line[3]
-			fellowsMap["livingSpace"] = livingSpace
+			if line[2] == "M" {
+				maleFellowsMap["name"] = fmt.Sprintf("%s %s", line[0], line[1])
+				maleFellowsMap["gender"] = line[2]
+				maleFellowsMap["position"] = line[3]
+				maleFellowsMap["livingSpace"] = livingSpace
 
-			fellowSlice = append(fellowSlice, fellowsMap)
+				maleFellowSlice = append(maleFellowSlice, maleFellowsMap)
+			}
+
+			if line[2] == "F" {
+				femaleFellowsMap["name"] = fmt.Sprintf("%s %s", line[0], line[1])
+				femaleFellowsMap["gender"] = line[2]
+				femaleFellowsMap["position"] = line[3]
+				femaleFellowsMap["livingSpace"] = livingSpace
+
+				femaleFellowSlice = append(femaleFellowSlice, femaleFellowsMap)
+			}
+
 		}
 
 	}
@@ -82,7 +96,8 @@ func generateObject(f *os.File) employeeMap {
 	}
 
 	employees["staff"] = staffSlice
-	employees["fellow"] = fellowSlice
+	employees["maleFellows"] = maleFellowSlice
+	employees["femaleFellows"] = femaleFellowSlice
 	return employees
 }
 
