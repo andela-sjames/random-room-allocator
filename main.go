@@ -13,26 +13,27 @@ import (
 type employeeMap map[string][]map[string]interface{}
 type employeeDataMap map[string]interface{}
 type employeeSlice []map[string]interface{}
-type membersSpace []map[string]interface{}
 
-type space struct {
+// Space struct defined
+type Space struct {
 	name       string
 	maxPersons int
+	members    employeeSlice
+	spaceType  string
 }
 
-type office struct {
-	*space
-	officeMembers membersSpace
-}
+func (sp *Space) addMembers(e employeeSlice) employeeSlice {
+	lenght := len(e)
+	for i := 0; i < sp.maxPersons; i++ {
+		fmt.Println(i)
+		// pop an item from the slice
+		if lenght > 0 {
+			e = e[:lenght-1]
+		}
+		sp.members = append(sp.members)
+	}
 
-type maleRoom struct {
-	*space
-	maleMembers membersSpace
-}
-
-type femaleRoom struct {
-	*space
-	femaleMembers membersSpace
+	return e
 }
 
 func closeFile(f *os.File) {
@@ -103,6 +104,20 @@ func generateObject(f *os.File) employeeMap {
 	return employees
 }
 
+func allocateToOffice(e *employeeSlice, offices []string) {
+	for _, office := range offices {
+		fmt.Println(office)
+
+		ofc := &Space{
+			name:       office,
+			maxPersons: 6,
+			spaceType:  "officeRoom",
+		}
+
+		ofc.addMembers(*e)
+	}
+}
+
 // FileParser gets data from inputfile.
 type fileParser struct {
 	filepath string
@@ -129,5 +144,12 @@ func main() {
 	// shuffle employee slice for random office allocation
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(eSlice), func(i, j int) { eSlice[i], eSlice[j] = eSlice[j], eSlice[i] })
+
+	// declare the hostels and office here
+	// femaleHostel := []string{"ruby", "platinum", "jade", "pearl", "diamond"}
+	// maleHostel := []string{"topaz", "silver", "gold", "onyx", "opal"}
+	office := []string{"Carat", "Anvil", "Crucible", "Kiln", "Forge", "Foundry", "Furnace", "Boiler", "Mint", "Vulcan"}
+	go allocateToOffice(&eSlice, office)
+	fmt.Scanln()
 
 }
