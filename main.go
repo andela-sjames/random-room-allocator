@@ -22,18 +22,19 @@ type Space struct {
 	spaceType  string
 }
 
-func (sp *Space) addMembers(e employeeSlice) employeeSlice {
-	lenght := len(e)
+func (sp *Space) addMembers(e employeeSlice) {
+	var lastItem employeeDataMap
 	for i := 0; i < sp.maxPersons; i++ {
-		fmt.Println(i)
 		// pop an item from the slice
-		if lenght > 0 {
-			e = e[:lenght-1]
-		}
-		sp.members = append(sp.members)
-	}
+		if len(e) > 0 {
+			// read the last item from the slice
+			lastItem = e[len(e)-1]
 
-	return e
+			// remove the last item of the slice
+			e = e[:len(e)-1]
+		}
+		sp.members = append(sp.members, lastItem)
+	}
 }
 
 func closeFile(f *os.File) {
@@ -116,6 +117,8 @@ func allocateToOffice(e *employeeSlice, offices []string) {
 
 		ofc.addMembers(*e)
 	}
+
+	fmt.Println(e)
 }
 
 // FileParser gets data from inputfile.
