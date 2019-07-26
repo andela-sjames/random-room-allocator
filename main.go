@@ -22,16 +22,17 @@ type Space struct {
 	spaceType  string
 }
 
-func (sp *Space) addMembers(e employeeSlice) {
+func (sp *Space) addMembers(e **employeeSlice) {
 	var lastItem employeeDataMap
+	fmt.Println(len(**e))
 	for i := 0; i < sp.maxPersons; i++ {
 		// pop an item from the slice
-		if len(e) > 0 {
+		if len(**e) > 0 {
 			// read the last item from the slice
-			lastItem = e[len(e)-1]
+			lastItem = (**e)[len(**e)-1]
 
 			// remove the last item of the slice
-			e = e[:len(e)-1]
+			**e = (**e)[:len(**e)-1]
 		}
 		sp.members = append(sp.members, lastItem)
 	}
@@ -108,6 +109,7 @@ func generateObject(f *os.File) employeeMap {
 func allocateToOffice(e *employeeSlice, offices []string) {
 	for _, office := range offices {
 		fmt.Println(office)
+		fmt.Println(&e, "intial address")
 
 		ofc := &Space{
 			name:       office,
@@ -115,7 +117,7 @@ func allocateToOffice(e *employeeSlice, offices []string) {
 			spaceType:  "officeRoom",
 		}
 
-		ofc.addMembers(*e)
+		ofc.addMembers(&e)
 	}
 
 	fmt.Println(e)
