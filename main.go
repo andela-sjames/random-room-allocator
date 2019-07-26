@@ -109,8 +109,6 @@ func generateObject(f *os.File) employeeMap {
 func allocateToOffice(e *employeeSlice, offices []string) {
 	for _, office := range offices {
 		fmt.Println(office)
-		fmt.Println(&e, "intial address")
-
 		ofc := &Space{
 			name:       office,
 			maxPersons: 6,
@@ -153,7 +151,12 @@ func main() {
 	// declare the hostels and office here
 	// femaleHostel := []string{"ruby", "platinum", "jade", "pearl", "diamond"}
 	// maleHostel := []string{"topaz", "silver", "gold", "onyx", "opal"}
-	office := []string{"Carat", "Anvil", "Crucible", "Kiln", "Forge", "Foundry", "Furnace", "Boiler", "Mint", "Vulcan"}
+	office := []string{
+		"Carat", "Anvil", "Crucible",
+		"Kiln", "Forge", "Foundry",
+		"Furnace", "Boiler",
+		"Mint", "Vulcan",
+	}
 	go allocateToOffice(&eSlice, office)
 	fmt.Scanln()
 
