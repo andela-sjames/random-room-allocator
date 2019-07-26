@@ -8,15 +8,28 @@ import (
 	"strings"
 )
 
-// Employee struct defined
-type employee struct {
-	name     string
-	gender   string
-	position string
-	optSpace bool
+type employeeMap map[string][]map[string]interface{}
+type membersSpace map[string]interface{}
+
+type space struct {
+	name       string
+	maxPersons int
 }
 
-type employeeMap map[string][]map[string]string
+type office struct {
+	*space
+	officeMembers membersSpace
+}
+
+type maleRoom struct {
+	*space
+	maleMembers membersSpace
+}
+
+type femaleRoom struct {
+	*space
+	femaleMembers membersSpace
+}
 
 func closeFile(f *os.File) {
 	fmt.Println("closing")
@@ -30,16 +43,16 @@ func closeFile(f *os.File) {
 func generateObject(f *os.File) employeeMap {
 	fmt.Println("generating data object")
 
-	employees := make(map[string][]map[string]string)
+	employees := make(map[string][]map[string]interface{})
 
-	var fellowSlice []map[string]string
-	var staffSlice []map[string]string
+	var fellowSlice []map[string]interface{}
+	var staffSlice []map[string]interface{}
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		line := strings.Fields(scanner.Text())
 		if line[3] == "STAFF" {
-			staffMap := make(map[string]string)
+			staffMap := make(map[string]interface{})
 			staffMap["name"] = fmt.Sprintf("%s %s ", line[0], line[1])
 			staffMap["gender"] = line[2]
 			staffMap["position"] = line[3]
@@ -48,16 +61,16 @@ func generateObject(f *os.File) employeeMap {
 		}
 
 		if line[3] == "FELLOW" {
-			fellowsMap := make(map[string]string)
-			optSpace := "true"
+			fellowsMap := make(map[string]interface{})
+			livingSpace := true
 			if line[3] == "Y" {
-				optSpace = "false"
+				livingSpace = false
 			}
 
-			fellowsMap["name"] = fmt.Sprintf("%s %s ", line[0], line[1])
+			fellowsMap["name"] = fmt.Sprintf("%s %s", line[0], line[1])
 			fellowsMap["gender"] = line[2]
 			fellowsMap["position"] = line[3]
-			fellowsMap["optSpace"] = optSpace
+			fellowsMap["livingSpace"] = livingSpace
 
 			fellowSlice = append(fellowSlice, fellowsMap)
 		}
