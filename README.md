@@ -6,4 +6,7 @@ A random room allocation system in go.
 
 
 #### Whats going on here:
-- Store allocations to json file
+- Store office allocations to json file
+- Store male hostel allocations to json file
+- Store female hostel allocations to json file
+- Store unallocated employee data to json file
