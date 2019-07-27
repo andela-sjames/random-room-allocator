@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"os"
@@ -16,24 +18,23 @@ type employeeSlice []map[string]interface{}
 
 // Space struct defined
 type Space struct {
-	name       string
-	maxPersons int
-	members    employeeSlice
-	spaceType  string
+	Name       string        `json:"Name"`
+	MaxPersons int           `json:"MaxPersons"`
+	Members    employeeSlice `json:"Members"`
+	SpaceType  string        `json:"Type"`
 }
 
 func (sp *Space) addMembers(e **employeeSlice) {
 	var lastItem employeeDataMap
-	for i := 0; i < sp.maxPersons; i++ {
+	for i := 0; i < sp.MaxPersons; i++ {
 		// pop an item from the slice
 		if len(**e) > 0 {
 			// read the last item from the slice
 			lastItem = (**e)[len(**e)-1]
-
 			// remove the last item of the slice
 			**e = (**e)[:len(**e)-1]
 		}
-		sp.members = append(sp.members, lastItem)
+		sp.Members = append(sp.Members, lastItem)
 	}
 }
 
@@ -121,16 +122,25 @@ func generateObject(f *os.File) employeeMap {
 }
 
 func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice chan<- interface{}) {
+	var file []byte
+	var allocationSlice []Space
+
 	for _, office := range offices {
-		fmt.Println(office)
 		ofc := &Space{
-			name:       office,
-			maxPersons: 6,
-			spaceType:  "officeRoom",
+			Name:       office,
+			MaxPersons: 6,
+			SpaceType:  "officeRoom",
 		}
 
 		ofc.addMembers(&e)
+
+		// append allocation to slice
+		allocationSlice = append(allocationSlice, *ofc)
 	}
+
+	// write allocation to json file
+	file, _ = json.MarshalIndent(allocationSlice, "", " ")
+	_ = ioutil.WriteFile("officeAllocation.json", file, 0644)
 
 	unAllocatedToOffice <- e
 }
