@@ -24,7 +24,6 @@ type Space struct {
 
 func (sp *Space) addMembers(e **employeeSlice) {
 	var lastItem employeeDataMap
-	fmt.Println(len(**e))
 	for i := 0; i < sp.maxPersons; i++ {
 		// pop an item from the slice
 		if len(**e) > 0 {
@@ -36,6 +35,21 @@ func (sp *Space) addMembers(e **employeeSlice) {
 		}
 		sp.members = append(sp.members, lastItem)
 	}
+}
+
+// FileParser gets data from inputfile.
+type fileParser struct {
+	filepath string
+}
+
+func (fp *fileParser) GetEmployees() employeeMap {
+	f, err := os.Open(fp.filepath)
+	if err != nil {
+		log.Fatalf("open file error: %v", err)
+		panic(err)
+	}
+	defer closeFile(f)
+	return generateObject(f)
 }
 
 func closeFile(f *os.File) {
@@ -106,7 +120,7 @@ func generateObject(f *os.File) employeeMap {
 	return employees
 }
 
-func allocateToOffice(e *employeeSlice, offices []string) {
+func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice chan<- interface{}) {
 	for _, office := range offices {
 		fmt.Println(office)
 		ofc := &Space{
@@ -118,22 +132,7 @@ func allocateToOffice(e *employeeSlice, offices []string) {
 		ofc.addMembers(&e)
 	}
 
-	fmt.Println(e)
-}
-
-// FileParser gets data from inputfile.
-type fileParser struct {
-	filepath string
-}
-
-func (fp *fileParser) GetEmployees() employeeMap {
-	f, err := os.Open(fp.filepath)
-	if err != nil {
-		log.Fatalf("open file error: %v", err)
-		panic(err)
-	}
-	defer closeFile(f)
-	return generateObject(f)
+	unAllocatedToOffice <- e
 }
 
 func main() {
@@ -157,7 +156,11 @@ func main() {
 		"Furnace", "Boiler",
 		"Mint", "Vulcan",
 	}
-	go allocateToOffice(&eSlice, office)
-	fmt.Scanln()
+
+	unAllocatedToOffice := make(chan interface{})
+	go allocateToOffice(&eSlice, office, unAllocatedToOffice)
+
+	fmt.Println(<-unAllocatedToOffice)
+	// fmt.Scanln()
 
 }
