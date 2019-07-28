@@ -6,7 +6,13 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "QUINN BARERAR",
+    "name": "SELMA GUERA",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "EDEN VAUGHN",
     "position": "FELLOW"
    },
    {
@@ -18,13 +24,7 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "LISANDRA THOMAS",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "DORIS DELEON",
+    "name": "CHASTITY COFFEY",
     "position": "FELLOW"
    }
   ],
@@ -37,19 +37,19 @@
    {
     "gender": "F",
     "livingSpace": true,
+    "name": "NOEL VALENCIA",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "RAYA BYRD",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
     "name": "TANISHA McFARLAND",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "SELMA GUERA",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "EDEN VAUGHN",
     "position": "FELLOW"
    },
    {
@@ -68,25 +68,25 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "NOEL VALENCIA",
+    "name": "QUINN BARERAR",
     "position": "FELLOW"
    },
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "RAYA BYRD",
+    "name": "DORIS DELEON",
     "position": "FELLOW"
    },
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "CHASTITY COFFEY",
+    "name": "LISANDRA THOMAS",
     "position": "FELLOW"
    },
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "CHASTITY COFFEY",
+    "name": "LISANDRA THOMAS",
     "position": "FELLOW"
    }
   ],

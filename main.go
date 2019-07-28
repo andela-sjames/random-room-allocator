@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -120,7 +121,7 @@ func generateObject(f *os.File) employeeMap {
 	return employees
 }
 
-func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice chan<- interface{}) {
+func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice chan<- interface{}, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -142,9 +143,10 @@ func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice ch
 	_ = ioutil.WriteFile("officeAllocation.json", file, 0644)
 
 	unAllocatedToOffice <- e
+	wg.Done()
 }
 
-func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- interface{}) {
+func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- interface{}, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -166,9 +168,10 @@ func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocated
 	_ = ioutil.WriteFile("maleHostelAllocation.json", file, 0644)
 
 	unAllocatedToMaleHostels <- mhs
+	wg.Done()
 }
 
-func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- interface{}) {
+func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- interface{}, wg *sync.WaitGroup) {
 
 	var file []byte
 	var allocationSlice []Space
@@ -191,6 +194,18 @@ func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAlloc
 	_ = ioutil.WriteFile("femaleHostelAllocation.json", file, 0644)
 
 	unAllocatedToFemaleHostels <- fhs
+	wg.Done()
+}
+
+func getUnallocatedemployees(officeSpace <-chan interface{}, maleHostels <-chan interface{}, femaleHostels <-chan interface{}, wg *sync.WaitGroup) {
+	fmt.Println("Waiting to recieve updates...")
+	officeLeftOvers := <-officeSpace
+	maleHostelsLeftOvers := <-maleHostels
+	femaleHostelsLeftOvers := <-femaleHostels
+
+	fmt.Println(officeLeftOvers, maleHostelsLeftOvers, femaleHostelsLeftOvers, "There are here gentlefella")
+	wg.Done()
+
 }
 
 func main() {
@@ -232,12 +247,14 @@ func main() {
 	unAllocatedToOffice := make(chan interface{})
 	unAllocatedToMaleHostels := make(chan interface{})
 	unAllocatedToFemaleHostels := make(chan interface{})
+	var wg sync.WaitGroup // add a wait group here
 
-	go allocateToOffice(&eSlice, office, unAllocatedToOffice)
-	go allocateToMaleHostels(&maleHostelSlice, maleHostel, unAllocatedToMaleHostels)
-	go allocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels)
+	wg.Add(4)
 
-	fmt.Println(<-unAllocatedToOffice)
-	fmt.Println(<-unAllocatedToMaleHostels)
-	fmt.Println(<-unAllocatedToFemaleHostels)
+	go allocateToOffice(&eSlice, office, unAllocatedToOffice, &wg)
+	go allocateToMaleHostels(&maleHostelSlice, maleHostel, unAllocatedToMaleHostels, &wg)
+	go allocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels, &wg)
+
+	go getUnallocatedemployees(unAllocatedToOffice, unAllocatedToMaleHostels, unAllocatedToFemaleHostels, &wg)
+	wg.Wait()
 }
