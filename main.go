@@ -169,6 +169,33 @@ func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocated
 
 }
 
+func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- interface{}) {
+
+	var file []byte
+	var allocationSlice []Space
+
+	for _, femaleHostel := range femaleHostels {
+		spc := &Space{
+			Name:       femaleHostel,
+			MaxPersons: 4,
+			SpaceType:  "femaleRoom",
+		}
+
+		spc.addMembers(&fhs)
+
+		// append allocation to slice
+		allocationSlice = append(allocationSlice, *spc)
+	}
+
+	fmt.Println(allocationSlice, "JJJJJJJJJ")
+	// write allocation to json file
+	file, _ = json.MarshalIndent(allocationSlice, "", " ")
+	_ = ioutil.WriteFile("femaleHostelAllocation.json", file, 0644)
+
+	unAllocatedToFemaleHostels <- fhs
+
+}
+
 func main() {
 	inputfile := &fileParser{filepath: "inputA.txt"}
 	e := inputfile.GetEmployees()
@@ -195,7 +222,7 @@ func main() {
 	})
 
 	// declare the hostels and office here
-	// femaleHostel := []string{"ruby", "platinum", "jade", "pearl", "diamond"}
+	femaleHostel := []string{"ruby", "platinum", "jade", "pearl", "diamond"}
 	maleHostel := []string{"topaz", "silver", "gold", "onyx", "opal"}
 	office := []string{
 		"Carat", "Anvil", "Crucible",
@@ -207,13 +234,15 @@ func main() {
 	// define channels here
 	unAllocatedToOffice := make(chan interface{})
 	unAllocatedToMaleHostels := make(chan interface{})
+	unAllocatedToFemaleHostels := make(chan interface{})
 
 	go allocateToOffice(&eSlice, office, unAllocatedToOffice)
 	go allocateToMaleHostels(&maleHostelSlice, maleHostel, unAllocatedToMaleHostels)
-	// go allocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels)
+	go allocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels)
 
 	fmt.Println(<-unAllocatedToOffice)
 	fmt.Println(<-unAllocatedToMaleHostels)
+	fmt.Println(<-unAllocatedToFemaleHostels)
 	// fmt.Scanln()
 
 }

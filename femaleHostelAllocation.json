@@ -1,0 +1,117 @@
+[
+ {
+  "Name": "ruby",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "HECTO DACEY",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "CHASTITY COFFEY",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "RAYA BYRD",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "IYANU ALIMI",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "femaleRoom"
+ },
+ {
+  "Name": "platinum",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "QUINN BARERAR",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "EDEN VAUGHN",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "SELMA GUERA",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "DORIS DELEON",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "femaleRoom"
+ },
+ {
+  "Name": "jade",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "LISANDRA THOMAS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "NOEL VALENCIA",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "TANISHA McFARLAND",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "TANISHA McFARLAND",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "femaleRoom"
+ },
+ {
+  "Name": "pearl",
+  "MaxPersons": 4,
+  "Members": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "Type": "femaleRoom"
+ },
+ {
+  "Name": "diamond",
+  "MaxPersons": 4,
+  "Members": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "Type": "femaleRoom"
+ }
+]
