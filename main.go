@@ -333,7 +333,7 @@ func main() {
 		femaleHostelSlice[i], femaleHostelSlice[j] = femaleHostelSlice[j], femaleHostelSlice[i]
 	})
 
-	// declare the hostels and office here
+	// declare the hostels and offices here
 	femaleHostel := []string{"ruby", "platinum", "jade", "pearl", "diamond"}
 	maleHostel := []string{"topaz", "silver", "gold", "onyx", "opal"}
 	office := []string{
