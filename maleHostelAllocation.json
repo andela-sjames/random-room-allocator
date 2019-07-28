@@ -1,0 +1,157 @@
+[
+ {
+  "Name": "topaz",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "CALEB WALL",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "TIMON RAMOS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "JUSTINS OWENS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "TOSIN ADESANYA",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "maleRoom"
+ },
+ {
+  "Name": "silver",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "ANDREW PHILLIPS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "OLUFUNMILADE OSHODI",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "UZO AWILI",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "ISSA JUBRIL",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "maleRoom"
+ },
+ {
+  "Name": "gold",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "ALEXANDRA HARTMAN",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "COLORADO PETTY",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "SIMON PATTERSON",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "ANDREW PHILLIPS",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "maleRoom"
+ },
+ {
+  "Name": "onyx",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "DALE BRITT",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "OLUWAFEMI SULE",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "ALMA JAEL",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "OPEOLUWA OGUNJIMI",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "maleRoom"
+ },
+ {
+  "Name": "opal",
+  "MaxPersons": 4,
+  "Members": [
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "ROSS GILBERT",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "KASIMIR LYNN",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "INIOLUWA FAGEYINGBO",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "SIERRA TRAVIS",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "maleRoom"
+ }
+]

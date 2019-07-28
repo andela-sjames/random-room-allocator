@@ -27,7 +27,6 @@ type Space struct {
 func (sp *Space) addMembers(e **employeeSlice) {
 	var lastItem employeeDataMap
 	for i := 0; i < sp.MaxPersons; i++ {
-		// pop an item from the slice
 		if len(**e) > 0 {
 			// read the last item from the slice
 			lastItem = (**e)[len(**e)-1]
@@ -126,16 +125,16 @@ func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice ch
 	var allocationSlice []Space
 
 	for _, office := range offices {
-		ofc := &Space{
+		spc := &Space{
 			Name:       office,
 			MaxPersons: 6,
 			SpaceType:  "officeRoom",
 		}
 
-		ofc.addMembers(&e)
+		spc.addMembers(&e)
 
 		// append allocation to slice
-		allocationSlice = append(allocationSlice, *ofc)
+		allocationSlice = append(allocationSlice, *spc)
 	}
 
 	// write allocation to json file
@@ -145,21 +144,59 @@ func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice ch
 	unAllocatedToOffice <- e
 }
 
+func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- interface{}) {
+	var file []byte
+	var allocationSlice []Space
+
+	for _, maleHostel := range maleHostels {
+		spc := &Space{
+			Name:       maleHostel,
+			MaxPersons: 4,
+			SpaceType:  "maleRoom",
+		}
+
+		spc.addMembers(&mhs)
+
+		// append allocation to slice
+		allocationSlice = append(allocationSlice, *spc)
+	}
+
+	// write allocation to json file
+	file, _ = json.MarshalIndent(allocationSlice, "", " ")
+	_ = ioutil.WriteFile("maleHostelAllocation.json", file, 0644)
+
+	unAllocatedToMaleHostels <- mhs
+
+}
+
 func main() {
 	inputfile := &fileParser{filepath: "inputA.txt"}
 	e := inputfile.GetEmployees()
-	var eSlice employeeSlice
+	var eSlice, maleHostelSlice, femaleHostelSlice employeeSlice
 	for _, val := range e {
 		eSlice = append(eSlice, val...)
 	}
+
+	maleHostelSlice, _ = e["maleFellows"]
+	femaleHostelSlice, _ = e["femaleFellows"]
 
 	// shuffle employee slice for random office allocation
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(eSlice), func(i, j int) { eSlice[i], eSlice[j] = eSlice[j], eSlice[i] })
 
+	// shuffle maleHostelSlice slice for random male hostel allocation
+	rand.Shuffle(len(maleHostelSlice), func(i, j int) {
+		maleHostelSlice[i], maleHostelSlice[j] = maleHostelSlice[j], maleHostelSlice[i]
+	})
+
+	// shuffle femaleHostelSlice slice for random female hostel allocation
+	rand.Shuffle(len(femaleHostelSlice), func(i, j int) {
+		femaleHostelSlice[i], femaleHostelSlice[j] = femaleHostelSlice[j], femaleHostelSlice[i]
+	})
+
 	// declare the hostels and office here
 	// femaleHostel := []string{"ruby", "platinum", "jade", "pearl", "diamond"}
-	// maleHostel := []string{"topaz", "silver", "gold", "onyx", "opal"}
+	maleHostel := []string{"topaz", "silver", "gold", "onyx", "opal"}
 	office := []string{
 		"Carat", "Anvil", "Crucible",
 		"Kiln", "Forge", "Foundry",
@@ -167,10 +204,16 @@ func main() {
 		"Mint", "Vulcan",
 	}
 
+	// define channels here
 	unAllocatedToOffice := make(chan interface{})
+	unAllocatedToMaleHostels := make(chan interface{})
+
 	go allocateToOffice(&eSlice, office, unAllocatedToOffice)
+	go allocateToMaleHostels(&maleHostelSlice, maleHostel, unAllocatedToMaleHostels)
+	// go allocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels)
 
 	fmt.Println(<-unAllocatedToOffice)
+	fmt.Println(<-unAllocatedToMaleHostels)
 	// fmt.Scanln()
 
 }
