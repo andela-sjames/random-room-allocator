@@ -16,6 +16,14 @@ import (
 type employeeMap map[string][]map[string]interface{}
 type employeeDataMap map[string]interface{}
 type employeeSlice []map[string]interface{}
+type notAllocatedSlice map[string][]Employee
+
+type Employee struct {
+	Name        interface{} `json:"Name"`
+	Gender      interface{} `json:"Gender"`
+	Position    interface{} `json:"Position"`
+	LivingSpace interface{} `json:"LivingSpace"`
+}
 
 // Space struct defined
 type Space struct {
@@ -88,7 +96,7 @@ func (fp *fileParser) GetEmployees() employeeMap {
 }
 
 func closeFile(f *os.File) {
-	fmt.Println("closing")
+	fmt.Println("Closing input file")
 	err := f.Close()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
@@ -97,11 +105,11 @@ func closeFile(f *os.File) {
 }
 
 func generateObject(f *os.File) employeeMap {
-	fmt.Println("generating data object")
+	fmt.Println("Opening input file")
 
 	employees := make(employeeMap)
-	var staffSlice employeeSlice
 
+	var staffSlice employeeSlice
 	var maleFellowSlice employeeSlice
 	var femaleFellowSlice employeeSlice
 
@@ -155,7 +163,7 @@ func generateObject(f *os.File) employeeMap {
 	return employees
 }
 
-func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice chan<- interface{}, wg *sync.WaitGroup) {
+func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice chan<- employeeSlice, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -176,11 +184,13 @@ func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice ch
 	file, _ = json.MarshalIndent(allocationSlice, "", " ")
 	_ = ioutil.WriteFile("officeAllocation.json", file, 0644)
 
-	unAllocatedToOffice <- e
+	fmt.Println(`Office allocation file "officeAllocation.json" created :)`)
+
+	unAllocatedToOffice <- *e
 	wg.Done()
 }
 
-func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- interface{}, wg *sync.WaitGroup) {
+func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- employeeSlice, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -201,11 +211,13 @@ func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocated
 	file, _ = json.MarshalIndent(allocationSlice, "", " ")
 	_ = ioutil.WriteFile("maleHostelAllocation.json", file, 0644)
 
-	unAllocatedToMaleHostels <- mhs
+	fmt.Println(`Male allocation file "maleHostelAllocation.json" created :)`)
+
+	unAllocatedToMaleHostels <- *mhs
 	wg.Done()
 }
 
-func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- interface{}, wg *sync.WaitGroup) {
+func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- employeeSlice, wg *sync.WaitGroup) {
 
 	var file []byte
 	var allocationSlice []Space
@@ -227,23 +239,73 @@ func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAlloc
 	file, _ = json.MarshalIndent(allocationSlice, "", " ")
 	_ = ioutil.WriteFile("femaleHostelAllocation.json", file, 0644)
 
-	unAllocatedToFemaleHostels <- fhs
+	fmt.Println(`Female allocation file "femaleHostelAllocation.json" created :)`)
+
+	unAllocatedToFemaleHostels <- *fhs
 	wg.Done()
 }
 
-func getUnallocatedemployees(officeSpace <-chan interface{}, maleHostels <-chan interface{}, femaleHostels <-chan interface{}, wg *sync.WaitGroup) {
-	fmt.Println("Waiting to recieve updates...")
+func getUnallocatedemployees(officeSpace <-chan employeeSlice, maleHostels <-chan employeeSlice, femaleHostels <-chan employeeSlice, wg *sync.WaitGroup) {
+	fmt.Println("Waiting to recieve no allocation updates...")
 
-	// var file []byte
-	// var allocationSlice []Space
+	var file []byte
 
 	officeLeftOvers := <-officeSpace
 	maleHostelsLeftOvers := <-maleHostels
 	femaleHostelsLeftOvers := <-femaleHostels
 
-	fmt.Println(officeLeftOvers, maleHostelsLeftOvers, femaleHostelsLeftOvers, "There are here gentlefella")
-	wg.Done()
+	employees := make(notAllocatedSlice)
+	var resultSlice []Employee
 
+	if len(officeLeftOvers) > 0 {
+		// office leftovers
+		for _, item := range officeLeftOvers {
+			emp := &Employee{
+				Name:     item["name"],
+				Gender:   item["gender"],
+				Position: item["position"],
+			}
+			resultSlice = append(resultSlice, *emp)
+		}
+
+		employees["staff"] = resultSlice
+	}
+
+	if len(maleHostelsLeftOvers) > 0 {
+		// maleHostelsLeftOvers leftovers
+		for _, item := range maleHostelsLeftOvers {
+			emp := &Employee{
+				Name:        item["name"],
+				Gender:      item["gender"],
+				Position:    item["position"],
+				LivingSpace: item["livingSpace"],
+			}
+			resultSlice = append(resultSlice, *emp)
+		}
+
+		employees["maleFellows"] = resultSlice
+	}
+
+	if len(femaleHostelsLeftOvers) > 0 {
+		for _, item := range maleHostelsLeftOvers {
+			emp := &Employee{
+				Name:        item["name"],
+				Gender:      item["gender"],
+				Position:    item["position"],
+				LivingSpace: item["livingSpace"],
+			}
+			resultSlice = append(resultSlice, *emp)
+		}
+
+		employees["femaleFellows"] = resultSlice
+	}
+
+	// write allocation to json file
+	file, _ = json.MarshalIndent(employees, "", " ")
+	_ = ioutil.WriteFile("NoAllocation.json", file, 0644)
+
+	fmt.Println(`No allocation file "NoAllocation.json" created :)`)
+	wg.Done()
 }
 
 func main() {
@@ -282,17 +344,19 @@ func main() {
 	}
 
 	// define channels here
-	unAllocatedToOffice := make(chan interface{})
-	unAllocatedToMaleHostels := make(chan interface{})
-	unAllocatedToFemaleHostels := make(chan interface{})
-	var wg sync.WaitGroup // add a wait group here
+	unAllocatedToOffice := make(chan employeeSlice)
+	unAllocatedToMaleHostels := make(chan employeeSlice)
+	unAllocatedToFemaleHostels := make(chan employeeSlice)
 
+	// add a wait group here
+	var wg sync.WaitGroup
 	wg.Add(4)
 
 	go allocateToOffice(&eSlice, office, unAllocatedToOffice, &wg)
 	go allocateToMaleHostels(&maleHostelSlice, maleHostel, unAllocatedToMaleHostels, &wg)
 	go allocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels, &wg)
-
 	go getUnallocatedemployees(unAllocatedToOffice, unAllocatedToMaleHostels, unAllocatedToFemaleHostels, &wg)
+
 	wg.Wait()
+	fmt.Println("Done!")
 }
