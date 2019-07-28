@@ -6,19 +6,7 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "HECTO DACEY",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "CHASTITY COFFEY",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "RAYA BYRD",
+    "name": "QUINN BARERAR",
     "position": "FELLOW"
    },
    {
@@ -26,30 +14,11 @@
     "livingSpace": true,
     "name": "IYANU ALIMI",
     "position": "FELLOW"
-   }
-  ],
-  "Type": "femaleRoom"
- },
- {
-  "Name": "platinum",
-  "MaxPersons": 4,
-  "Members": [
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "QUINN BARERAR",
-    "position": "FELLOW"
    },
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "EDEN VAUGHN",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "SELMA GUERA",
+    "name": "LISANDRA THOMAS",
     "position": "FELLOW"
    },
    {
@@ -62,15 +31,40 @@
   "Type": "femaleRoom"
  },
  {
-  "Name": "jade",
+  "Name": "platinum",
   "MaxPersons": 4,
   "Members": [
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "LISANDRA THOMAS",
+    "name": "TANISHA McFARLAND",
     "position": "FELLOW"
    },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "SELMA GUERA",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "EDEN VAUGHN",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "HECTO DACEY",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "femaleRoom"
+ },
+ {
+  "Name": "jade",
+  "MaxPersons": 4,
+  "Members": [
    {
     "gender": "F",
     "livingSpace": true,
@@ -80,13 +74,19 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "TANISHA McFARLAND",
+    "name": "RAYA BYRD",
     "position": "FELLOW"
    },
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "TANISHA McFARLAND",
+    "name": "CHASTITY COFFEY",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "CHASTITY COFFEY",
     "position": "FELLOW"
    }
   ],

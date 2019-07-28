@@ -166,7 +166,6 @@ func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocated
 	_ = ioutil.WriteFile("maleHostelAllocation.json", file, 0644)
 
 	unAllocatedToMaleHostels <- mhs
-
 }
 
 func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- interface{}) {
@@ -187,13 +186,11 @@ func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAlloc
 		allocationSlice = append(allocationSlice, *spc)
 	}
 
-	fmt.Println(allocationSlice, "JJJJJJJJJ")
 	// write allocation to json file
 	file, _ = json.MarshalIndent(allocationSlice, "", " ")
 	_ = ioutil.WriteFile("femaleHostelAllocation.json", file, 0644)
 
 	unAllocatedToFemaleHostels <- fhs
-
 }
 
 func main() {
@@ -243,6 +240,4 @@ func main() {
 	fmt.Println(<-unAllocatedToOffice)
 	fmt.Println(<-unAllocatedToMaleHostels)
 	fmt.Println(<-unAllocatedToFemaleHostels)
-	// fmt.Scanln()
-
 }
