@@ -5,21 +5,13 @@
   "Members": [
    {
     "gender": "M",
-    "livingSpace": true,
-    "name": "ISSA JUBRIL",
-    "position": "FELLOW"
+    "name": "DYKLAN LEENTH ",
+    "position": "STAFF"
    },
    {
     "gender": "M",
-    "livingSpace": true,
-    "name": "SIMON PATTERSON",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "TANISHA McFARLAND",
-    "position": "FELLOW"
+    "name": "KATELL FERNANDEZ ",
+    "position": "STAFF"
    },
    {
     "gender": "M",
@@ -28,14 +20,21 @@
     "position": "FELLOW"
    },
    {
-    "gender": "M",
-    "name": "MATTHEW O'CONNOR ",
-    "position": "STAFF"
+    "gender": "F",
+    "livingSpace": true,
+    "name": "IYANU ALIMI",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "RAYA BYRD",
+    "position": "FELLOW"
    },
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "COLORADO PETTY",
+    "name": "UZO AWILI",
     "position": "FELLOW"
    }
   ],
@@ -48,113 +47,30 @@
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "JUSTINS OWENS",
+    "name": "TIMON RAMOS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "EDEN VAUGHN",
     "position": "FELLOW"
    },
    {
     "gender": "M",
-    "name": "GODSON UKPERE ",
-    "position": "STAFF"
-   },
-   {
-    "gender": "M",
-    "name": "DOMINIC TYLER ",
+    "name": "CHIDI NNADI ",
     "position": "STAFF"
    },
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "LISANDRA THOMAS",
+    "name": "DORIS DELEON",
     "position": "FELLOW"
-   },
-   {
-    "gender": "M",
-    "name": "JORDAN ELLISON ",
-    "position": "STAFF"
    },
    {
     "gender": "M",
     "livingSpace": true,
     "name": "SAMUEL JAMES",
-    "position": "FELLOW"
-   }
-  ],
-  "Type": "officeRoom"
- },
- {
-  "Name": "Crucible",
-  "MaxPersons": 6,
-  "Members": [
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "UZO AWILI",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "ROSS GILBERT",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "IYANU ALIMI",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "SELMA GUERA",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "M",
-    "name": "MATTHEW O'CONNOR ",
-    "position": "STAFF"
-   },
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "OLUWAFEMI SULE",
-    "position": "FELLOW"
-   }
-  ],
-  "Type": "officeRoom"
- },
- {
-  "Name": "Kiln",
-  "MaxPersons": 6,
-  "Members": [
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "INIOLUWA FAGEYINGBO",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "KASIMIR LYNN",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "DOMINIC WALTERS",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "CHASTITY COFFEY",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "ALMA JAEL",
     "position": "FELLOW"
    },
    {
@@ -167,13 +83,30 @@
   "Type": "officeRoom"
  },
  {
-  "Name": "Forge",
+  "Name": "Crucible",
   "MaxPersons": 6,
   "Members": [
    {
-    "gender": "F",
-    "name": "ASTRA BROWN ",
+    "gender": "M",
+    "name": "MATTHEW O'CONNOR ",
     "position": "STAFF"
+   },
+   {
+    "gender": "M",
+    "name": "MATTHEW O'CONNOR ",
+    "position": "STAFF"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "QUINN BARERAR",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "CHASTITY COFFEY",
+    "position": "FELLOW"
    },
    {
     "gender": "M",
@@ -184,24 +117,94 @@
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "OLUFUNMILADE OSHODI",
+    "name": "ALMA JAEL",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "officeRoom"
+ },
+ {
+  "Name": "Kiln",
+  "MaxPersons": 6,
+  "Members": [
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "TANISHA McFARLAND",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "SELMA GUERA",
     "position": "FELLOW"
    },
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "ALEXANDRA HARTMAN",
+    "name": "ANDREW PHILLIPS",
     "position": "FELLOW"
    },
    {
     "gender": "M",
-    "name": "AHMED AKUBE ",
-    "position": "STAFF"
+    "livingSpace": true,
+    "name": "ISSA JUBRIL",
+    "position": "FELLOW"
    },
    {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "ARDEN HIGGINS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "JOHN ADEWALE",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "officeRoom"
+ },
+ {
+  "Name": "Forge",
+  "MaxPersons": 6,
+  "Members": [
+   {
     "gender": "F",
-    "name": "MYRA KLINE ",
-    "position": "STAFF"
+    "livingSpace": true,
+    "name": "NOEL VALENCIA",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "CALEB WALL",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "KASIMIR LYNN",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "SIERRA TRAVIS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "INIOLUWA FAGEYINGBO",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "OLUFUNMILADE OSHODI",
+    "position": "FELLOW"
    }
   ],
   "Type": "officeRoom"
@@ -211,14 +214,54 @@
   "MaxPersons": 6,
   "Members": [
    {
-    "gender": "M",
-    "name": "CHIDI NNADI ",
+    "gender": "F",
+    "name": "ASTRA BROWN ",
+    "position": "STAFF"
+   },
+   {
+    "gender": "F",
+    "name": "MYRA KLINE ",
     "position": "STAFF"
    },
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "TIMON RAMOS",
+    "name": "ROSS GILBERT",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "SIMON PATTERSON",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "name": "AILEEN RYAN ",
+    "position": "STAFF"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "LISANDRA THOMAS",
+    "position": "FELLOW"
+   }
+  ],
+  "Type": "officeRoom"
+ },
+ {
+  "Name": "Furnace",
+  "MaxPersons": 6,
+  "Members": [
+   {
+    "gender": "M",
+    "name": "DOMINIC TYLER ",
+    "position": "STAFF"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "OLUWAFEMI SULE",
     "position": "FELLOW"
    },
    {
@@ -230,60 +273,19 @@
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "ARDEN HIGGINS",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "HECTO DACEY",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "M",
-    "name": "KATELL FERNANDEZ ",
-    "position": "STAFF"
-   }
-  ],
-  "Type": "officeRoom"
- },
- {
-  "Name": "Furnace",
-  "MaxPersons": 6,
-  "Members": [
-   {
-    "gender": "M",
-    "livingSpace": true,
-    "name": "CALEB WALL",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "name": "AILEEN RYAN ",
-    "position": "STAFF"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "RAYA BYRD",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "EDEN VAUGHN",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "QUINN BARERAR",
+    "name": "ALEXANDRA HARTMAN",
     "position": "FELLOW"
    },
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "SIERRA TRAVIS",
+    "name": "DOMINIC WALTERS",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "M",
+    "livingSpace": true,
+    "name": "JUSTINS OWENS",
     "position": "FELLOW"
    }
   ],
@@ -296,37 +298,34 @@
    {
     "gender": "M",
     "livingSpace": true,
-    "name": "ANDREW PHILLIPS",
+    "name": "COLORADO PETTY",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "HECTO DACEY",
     "position": "FELLOW"
    },
    {
     "gender": "M",
-    "name": "DYKLAN LEENTH ",
+    "name": "GODSON UKPERE ",
     "position": "STAFF"
    },
    {
     "gender": "M",
-    "livingSpace": true,
-    "name": "JOHN ADEWALE",
-    "position": "FELLOW"
+    "name": "AHMED AKUBE ",
+    "position": "STAFF"
    },
    {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "DORIS DELEON",
-    "position": "FELLOW"
+    "gender": "M",
+    "name": "JORDAN ELLISON ",
+    "position": "STAFF"
    },
    {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "NOEL VALENCIA",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "NOEL VALENCIA",
-    "position": "FELLOW"
+    "gender": "M",
+    "name": "JORDAN ELLISON ",
+    "position": "STAFF"
    }
   ],
   "Type": "officeRoom"

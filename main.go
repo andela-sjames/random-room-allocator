@@ -25,7 +25,7 @@ type Space struct {
 	SpaceType  string        `json:"Type"`
 }
 
-func (sp *Space) addMembers(e **employeeSlice) {
+func (sp *Space) addOfficeMembers(e **employeeSlice) {
 	var lastItem employeeDataMap
 	for i := 0; i < sp.MaxPersons; i++ {
 		if len(**e) > 0 {
@@ -35,6 +35,40 @@ func (sp *Space) addMembers(e **employeeSlice) {
 			**e = (**e)[:len(**e)-1]
 		}
 		sp.Members = append(sp.Members, lastItem)
+	}
+}
+
+func (sp *Space) addMaleMembers(e **employeeSlice) {
+	var lastItem employeeDataMap
+	for i := 0; i < sp.MaxPersons; i++ {
+		if len(**e) > 0 {
+			// read the last item from the slice
+			lastItem = (**e)[len(**e)-1]
+
+			// add only if member wants living space
+			if lastItem["livingSpace"] == true {
+				sp.Members = append(sp.Members, lastItem)
+			}
+			// remove the last item of the slice
+			**e = (**e)[:len(**e)-1]
+		}
+	}
+}
+
+func (sp *Space) addFemaleMembers(e **employeeSlice) {
+	var lastItem employeeDataMap
+	for i := 0; i < sp.MaxPersons; i++ {
+		if len(**e) > 0 {
+			// read the last item from the slice
+			lastItem = (**e)[len(**e)-1]
+
+			// add only if member wants living space
+			if lastItem["livingSpace"] == true {
+				sp.Members = append(sp.Members, lastItem)
+			}
+			// remove the last item of the slice
+			**e = (**e)[:len(**e)-1]
+		}
 	}
 }
 
@@ -132,7 +166,7 @@ func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice ch
 			SpaceType:  "officeRoom",
 		}
 
-		spc.addMembers(&e)
+		spc.addOfficeMembers(&e)
 
 		// append allocation to slice
 		allocationSlice = append(allocationSlice, *spc)
@@ -157,7 +191,7 @@ func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocated
 			SpaceType:  "maleRoom",
 		}
 
-		spc.addMembers(&mhs)
+		spc.addMaleMembers(&mhs)
 
 		// append allocation to slice
 		allocationSlice = append(allocationSlice, *spc)
@@ -183,7 +217,7 @@ func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAlloc
 			SpaceType:  "femaleRoom",
 		}
 
-		spc.addMembers(&fhs)
+		spc.addFemaleMembers(&fhs)
 
 		// append allocation to slice
 		allocationSlice = append(allocationSlice, *spc)
@@ -199,6 +233,10 @@ func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAlloc
 
 func getUnallocatedemployees(officeSpace <-chan interface{}, maleHostels <-chan interface{}, femaleHostels <-chan interface{}, wg *sync.WaitGroup) {
 	fmt.Println("Waiting to recieve updates...")
+
+	// var file []byte
+	// var allocationSlice []Space
+
 	officeLeftOvers := <-officeSpace
 	maleHostelsLeftOvers := <-maleHostels
 	femaleHostelsLeftOvers := <-femaleHostels
