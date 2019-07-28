@@ -1,6 +1,8 @@
 # intialize go module
 go mod init
 
+# build go file
+go build main.go
 
-// go unallocatedList() this will wait on 3 channels and will be the last to finish
-waitgroup
+# run go code
+go run main.go
