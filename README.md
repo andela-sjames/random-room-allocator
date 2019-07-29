@@ -21,7 +21,7 @@ Femalerooms prepopulated are: 'ruby', 'platinum', 'jade', 'pearl', 'diamond'
 ```
 
 
-```
+```Text
 Basic Conditions:
 1. No staff should be allocated to Male or Female Rooms
 2. No Male or Female room should exceed 4 persons
@@ -29,15 +29,18 @@ Basic Conditions:
 ```
 
 ### Sample input file structure
-```
+
+```Text
 BOLA AHMED   M FELLOW Y
 JOHN OBI     M FELLOW N
-ISSAC NNADI  M STAFF   
+ISSAC NNADI  M STAFF
 CRIBS JANE   F FELLOW Y
 ```
 
 ### build go file
+
 go build main.go
 
 ### run go code
+
 go run main.go
