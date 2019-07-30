@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"math/rand"
 	"os"
 	"strings"
@@ -78,21 +77,6 @@ func (sp *Space) addFemaleMembers(e **employeeSlice) {
 			**e = (**e)[:len(**e)-1]
 		}
 	}
-}
-
-// FileParser gets data from inputfile.
-type fileParser struct {
-	filepath string
-}
-
-func (fp *fileParser) GetEmployees() employeeMap {
-	f, err := os.Open(fp.filepath)
-	if err != nil {
-		log.Fatalf("open file error: %v", err)
-		panic(err)
-	}
-	defer closeFile(f)
-	return generateObject(f)
 }
 
 func closeFile(f *os.File) {
@@ -309,7 +293,7 @@ func getUnallocatedemployees(officeSpace <-chan employeeSlice, maleHostels <-cha
 }
 
 func main() {
-	inputfile := &fileParser{filepath: "inputA.txt"}
+	inputfile := &FileParser{filepath: "inputA.txt"}
 	e := inputfile.GetEmployees()
 	var eSlice, maleHostelSlice, femaleHostelSlice employeeSlice
 	for _, val := range e {
