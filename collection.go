@@ -1,8 +1,5 @@
 package main
 
-// NotAllocatedSlice type defined
-type NotAllocatedSlice map[string][]Employee
-
 // Employee struct defined
 type Employee struct {
 	Name        interface{} `json:"Name"`

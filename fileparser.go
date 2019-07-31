@@ -8,15 +8,6 @@ import (
 	"strings"
 )
 
-// EmployeeMap type
-type EmployeeMap map[string][]map[string]interface{}
-
-// EmployeeDataMap type defined
-type EmployeeDataMap map[string]interface{}
-
-// EmployeeSlice type defined
-type EmployeeSlice []map[string]interface{}
-
 // FileParser gets data from inputfile.
 type FileParser struct {
 	Filepath string
