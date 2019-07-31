@@ -1,5 +1,0 @@
-# intialize go module
-go mod init
-
-# run go code
-go run {fileparser,main,collection,allocation}.go
