@@ -1,3 +1,5 @@
+package main
+
 import (
 	"bufio"
 	"fmt"
@@ -6,15 +8,22 @@ import (
 	"strings"
 )
 
-type employeeMap map[string][]map[string]interface{}
-type employeeDataMap map[string]interface{}
+// EmployeeMap type
+type EmployeeMap map[string][]map[string]interface{}
+
+// EmployeeDataMap type defined
+type EmployeeDataMap map[string]interface{}
+
+// EmployeeSlice type defined
+type EmployeeSlice []map[string]interface{}
 
 // FileParser gets data from inputfile.
 type FileParser struct {
 	Filepath string
 }
 
-func (fp *FileParser) GetEmployees() employeeMap {
+// GetEmployees fileparser method defined below
+func (fp *FileParser) GetEmployees() EmployeeMap {
 	f, err := os.Open(fp.Filepath)
 	if err != nil {
 		log.Fatalf("open file error: %v", err)
@@ -33,20 +42,20 @@ func closeFile(f *os.File) {
 	}
 }
 
-func generateObject(f *os.File) employeeMap {
+func generateObject(f *os.File) EmployeeMap {
 	fmt.Println("Opening input file")
 
-	employees := make(employeeMap)
+	employees := make(EmployeeMap)
 
-	var staffSlice employeeSlice
-	var maleFellowSlice employeeSlice
-	var femaleFellowSlice employeeSlice
+	var staffSlice EmployeeSlice
+	var maleFellowSlice EmployeeSlice
+	var femaleFellowSlice EmployeeSlice
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		line := strings.Fields(scanner.Text())
 		if line[3] == "STAFF" {
-			staffMap := make(employeeDataMap)
+			staffMap := make(EmployeeDataMap)
 			staffMap["name"] = fmt.Sprintf("%s %s ", line[0], line[1])
 			staffMap["gender"] = line[2]
 			staffMap["position"] = line[3]
@@ -55,8 +64,8 @@ func generateObject(f *os.File) employeeMap {
 		}
 
 		if line[3] == "FELLOW" {
-			maleFellowsMap := make(employeeDataMap)
-			femaleFellowsMap := make(employeeDataMap)
+			maleFellowsMap := make(EmployeeDataMap)
+			femaleFellowsMap := make(EmployeeDataMap)
 			livingSpace := true
 			if line[3] == "Y" {
 				livingSpace = false

@@ -6,25 +6,25 @@
    {
     "gender": "F",
     "livingSpace": true,
+    "name": "HECTO DACEY",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "SELMA GUERA",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "DORIS DELEON",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
     "name": "TANISHA McFARLAND",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "QUINN BARERAR",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "CHASTITY COFFEY",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "LISANDRA THOMAS",
     "position": "FELLOW"
    }
   ],
@@ -37,25 +37,25 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "RAYA BYRD",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "DORIS DELEON",
-    "position": "FELLOW"
-   },
-   {
-    "gender": "F",
-    "livingSpace": true,
-    "name": "HECTO DACEY",
+    "name": "LISANDRA THOMAS",
     "position": "FELLOW"
    },
    {
     "gender": "F",
     "livingSpace": true,
     "name": "IYANU ALIMI",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "RAYA BYRD",
+    "position": "FELLOW"
+   },
+   {
+    "gender": "F",
+    "livingSpace": true,
+    "name": "QUINN BARERAR",
     "position": "FELLOW"
    }
   ],
@@ -68,7 +68,7 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "SELMA GUERA",
+    "name": "NOEL VALENCIA",
     "position": "FELLOW"
    },
    {
@@ -80,7 +80,7 @@
    {
     "gender": "F",
     "livingSpace": true,
-    "name": "NOEL VALENCIA",
+    "name": "CHASTITY COFFEY",
     "position": "FELLOW"
    }
   ],
