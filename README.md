@@ -43,4 +43,4 @@ go build go run {fileparser,main,collection,allocation}.go
 
 ### run go code
 
-go run {fileparser,main,collection,allocation}.go
+go run {fileparser,main,collection,allocation,datatypes}.go
