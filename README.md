@@ -4,7 +4,7 @@ A random room allocation system in go.
 
 ## Algorithm to randomly allocate company members to randomly generated rooms
 
-### Some context here.
+### Some context here
 
 - Store office space allocation to a json file
 - Store male hostel allocation to a json file
@@ -39,8 +39,8 @@ CRIBS JANE   F FELLOW Y
 
 ### build go file
 
-go build main.go
+go build go run {fileparser,main,collection,allocation}.go
 
 ### run go code
 
-go run main.go
+go run {fileparser,main,collection,allocation}.go

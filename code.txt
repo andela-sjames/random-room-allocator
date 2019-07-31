@@ -1,8 +1,5 @@
 # intialize go module
 go mod init
 
-# build go file
-go build main.go
-
 # run go code
 go run {fileparser,main,collection,allocation}.go
