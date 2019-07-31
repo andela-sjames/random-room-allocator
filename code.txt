@@ -6,3 +6,6 @@ go build main.go
 
 # run go code
 go run main.go
+
+go run fileparser.go main.go
+go run {fileparser,main}.go

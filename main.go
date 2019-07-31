@@ -9,76 +9,7 @@ import (
 	"time"
 )
 
-type employeeMap map[string][]map[string]interface{}
-type employeeDataMap map[string]interface{}
-
-type employeeSlice []map[string]interface{}
-type notAllocatedSlice map[string][]Employee
-
-// Employee struct defined
-type Employee struct {
-	Name        interface{} `json:"Name"`
-	Gender      interface{} `json:"Gender"`
-	Position    interface{} `json:"Position"`
-	LivingSpace interface{} `json:"LivingSpace"`
-}
-
-// Space struct defined
-type Space struct {
-	Name       string        `json:"Name"`
-	MaxPersons int           `json:"MaxPersons"`
-	Members    employeeSlice `json:"Members"`
-	SpaceType  string        `json:"Type"`
-}
-
-func (sp *Space) addOfficeMembers(e **employeeSlice) {
-	var lastItem employeeDataMap
-	for i := 0; i < sp.MaxPersons; i++ {
-		if len(**e) > 0 {
-			// read the last item from the slice
-			lastItem = (**e)[len(**e)-1]
-			// remove the last item of the slice
-			**e = (**e)[:len(**e)-1]
-		}
-		sp.Members = append(sp.Members, lastItem)
-	}
-}
-
-func (sp *Space) addMaleMembers(e **employeeSlice) {
-	var lastItem employeeDataMap
-	for i := 0; i < sp.MaxPersons; i++ {
-		if len(**e) > 0 {
-			// read the last item from the slice
-			lastItem = (**e)[len(**e)-1]
-
-			// add only if member wants living space
-			if lastItem["livingSpace"] == true {
-				sp.Members = append(sp.Members, lastItem)
-			}
-			// remove the last item of the slice
-			**e = (**e)[:len(**e)-1]
-		}
-	}
-}
-
-func (sp *Space) addFemaleMembers(e **employeeSlice) {
-	var lastItem employeeDataMap
-	for i := 0; i < sp.MaxPersons; i++ {
-		if len(**e) > 0 {
-			// read the last item from the slice
-			lastItem = (**e)[len(**e)-1]
-
-			// add only if member wants living space
-			if lastItem["livingSpace"] == true {
-				sp.Members = append(sp.Members, lastItem)
-			}
-			// remove the last item of the slice
-			**e = (**e)[:len(**e)-1]
-		}
-	}
-}
-
-func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice chan<- employeeSlice, wg *sync.WaitGroup) {
+func allocateToOffice(e *EmployeeSlice, offices []string, unAllocatedToOffice chan<- EmployeeSlice, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -105,7 +36,7 @@ func allocateToOffice(e *employeeSlice, offices []string, unAllocatedToOffice ch
 	wg.Done()
 }
 
-func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- employeeSlice, wg *sync.WaitGroup) {
+func allocateToMaleHostels(mhs *EmployeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- EmployeeSlice, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -132,7 +63,7 @@ func allocateToMaleHostels(mhs *employeeSlice, maleHostels []string, unAllocated
 	wg.Done()
 }
 
-func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- employeeSlice, wg *sync.WaitGroup) {
+func allocateToFemaleHostels(fhs *EmployeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- EmployeeSlice, wg *sync.WaitGroup) {
 
 	var file []byte
 	var allocationSlice []Space
@@ -160,7 +91,7 @@ func allocateToFemaleHostels(fhs *employeeSlice, femaleHostels []string, unAlloc
 	wg.Done()
 }
 
-func getUnallocatedemployees(officeSpace <-chan employeeSlice, maleHostels <-chan employeeSlice, femaleHostels <-chan employeeSlice, wg *sync.WaitGroup) {
+func getUnallocatedemployees(officeSpace <-chan EmployeeSlice, maleHostels <-chan EmployeeSlice, femaleHostels <-chan EmployeeSlice, wg *sync.WaitGroup) {
 	fmt.Println("Waiting to recieve no allocation updates...")
 
 	var file []byte
@@ -169,7 +100,7 @@ func getUnallocatedemployees(officeSpace <-chan employeeSlice, maleHostels <-cha
 	maleHostelsLeftOvers := <-maleHostels
 	femaleHostelsLeftOvers := <-femaleHostels
 
-	employees := make(notAllocatedSlice)
+	employees := make(NotAllocatedSlice)
 	var resultSlice []Employee
 
 	if len(officeLeftOvers) > 0 {
@@ -226,7 +157,7 @@ func getUnallocatedemployees(officeSpace <-chan employeeSlice, maleHostels <-cha
 func main() {
 	inputfile := &FileParser{Filepath: "inputA.txt"}
 	e := inputfile.GetEmployees()
-	var eSlice, maleHostelSlice, femaleHostelSlice employeeSlice
+	var eSlice, maleHostelSlice, femaleHostelSlice EmployeeSlice
 	for _, val := range e {
 		eSlice = append(eSlice, val...)
 	}
@@ -259,9 +190,9 @@ func main() {
 	}
 
 	// define channels here
-	unAllocatedToOffice := make(chan employeeSlice)
-	unAllocatedToMaleHostels := make(chan employeeSlice)
-	unAllocatedToFemaleHostels := make(chan employeeSlice)
+	unAllocatedToOffice := make(chan EmployeeSlice)
+	unAllocatedToMaleHostels := make(chan EmployeeSlice)
+	unAllocatedToFemaleHostels := make(chan EmployeeSlice)
 
 	// add a wait group here
 	var wg sync.WaitGroup
