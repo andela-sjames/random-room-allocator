@@ -39,8 +39,8 @@ CRIBS JANE   F FELLOW Y
 
 ### build go file
 
-go build go run {fileparser,main,collection,allocation}.go
+go build main.go
 
 ### run go code
 
-go run {fileparser,main,collection,allocation,datatypes}.go
+go run main.go
