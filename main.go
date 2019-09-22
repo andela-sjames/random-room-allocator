@@ -5,12 +5,14 @@ import (
 	"math/rand"
 	"sync"
 	"time"
+
+	"github.com/andela-sjames/random-room-allocator/allocator"
 )
 
 func main() {
-	inputfile := &FileParser{Filepath: "inputA.txt"}
+	inputfile := &allocator.FileParser{Filepath: "inputA.txt"}
 	e := inputfile.GetEmployees()
-	var eSlice, maleHostelSlice, femaleHostelSlice EmployeeSlice
+	var eSlice, maleHostelSlice, femaleHostelSlice
 	for _, val := range e {
 		eSlice = append(eSlice, val...)
 	}
@@ -43,9 +45,9 @@ func main() {
 	}
 
 	// define channels here
-	unAllocatedToOffice := make(chan EmployeeSlice)
-	unAllocatedToMaleHostels := make(chan EmployeeSlice)
-	unAllocatedToFemaleHostels := make(chan EmployeeSlice)
+	unAllocatedToOffice := make(chan allocator.EmployeeSlice)
+	unAllocatedToMaleHostels := make(chan allocator.EmployeeSlice)
+	unAllocatedToFemaleHostels := make(chan allocator.EmployeeSlice)
 
 	// add a wait group here
 	var wg sync.WaitGroup
