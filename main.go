@@ -12,7 +12,7 @@ import (
 func main() {
 	inputfile := &allocator.FileParser{Filepath: "inputA.txt"}
 	e := inputfile.GetEmployees()
-	var eSlice, maleHostelSlice, femaleHostelSlice
+	var eSlice, maleHostelSlice, femaleHostelSlice allocator.EmployeeSlice
 	for _, val := range e {
 		eSlice = append(eSlice, val...)
 	}
@@ -53,10 +53,10 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(4)
 
-	go allocateToOffice(&eSlice, office, unAllocatedToOffice, &wg)
-	go allocateToMaleHostels(&maleHostelSlice, maleHostel, unAllocatedToMaleHostels, &wg)
-	go allocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels, &wg)
-	go getUnallocatedemployees(unAllocatedToOffice, unAllocatedToMaleHostels, unAllocatedToFemaleHostels, &wg)
+	go allocator.AllocateToOffice(&eSlice, office, unAllocatedToOffice, &wg)
+	go allocator.AllocateToMaleHostels(&maleHostelSlice, maleHostel, unAllocatedToMaleHostels, &wg)
+	go allocator.AllocateToFemaleHostels(&femaleHostelSlice, femaleHostel, unAllocatedToFemaleHostels, &wg)
+	go allocator.GetUnallocatedemployees(unAllocatedToOffice, unAllocatedToMaleHostels, unAllocatedToFemaleHostels, &wg)
 
 	wg.Wait()
 	fmt.Println("Done!")

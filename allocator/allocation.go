@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-func allocateToOffice(e *EmployeeSlice, offices []string, unAllocatedToOffice chan<- EmployeeSlice, wg *sync.WaitGroup) {
+func AllocateToOffice(e *EmployeeSlice, offices []string, unAllocatedToOffice chan<- EmployeeSlice, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -34,7 +34,7 @@ func allocateToOffice(e *EmployeeSlice, offices []string, unAllocatedToOffice ch
 	wg.Done()
 }
 
-func allocateToMaleHostels(mhs *EmployeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- EmployeeSlice, wg *sync.WaitGroup) {
+func AllocateToMaleHostels(mhs *EmployeeSlice, maleHostels []string, unAllocatedToMaleHostels chan<- EmployeeSlice, wg *sync.WaitGroup) {
 	var file []byte
 	var allocationSlice []Space
 
@@ -61,7 +61,7 @@ func allocateToMaleHostels(mhs *EmployeeSlice, maleHostels []string, unAllocated
 	wg.Done()
 }
 
-func allocateToFemaleHostels(fhs *EmployeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- EmployeeSlice, wg *sync.WaitGroup) {
+func AllocateToFemaleHostels(fhs *EmployeeSlice, femaleHostels []string, unAllocatedToFemaleHostels chan<- EmployeeSlice, wg *sync.WaitGroup) {
 
 	var file []byte
 	var allocationSlice []Space
@@ -89,7 +89,7 @@ func allocateToFemaleHostels(fhs *EmployeeSlice, femaleHostels []string, unAlloc
 	wg.Done()
 }
 
-func getUnallocatedemployees(officeSpace <-chan EmployeeSlice, maleHostels <-chan EmployeeSlice, femaleHostels <-chan EmployeeSlice, wg *sync.WaitGroup) {
+func GetUnallocatedemployees(officeSpace <-chan EmployeeSlice, maleHostels <-chan EmployeeSlice, femaleHostels <-chan EmployeeSlice, wg *sync.WaitGroup) {
 	fmt.Println("Waiting to recieve no allocation updates...")
 
 	var file []byte
